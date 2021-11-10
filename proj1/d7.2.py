@@ -1,0 +1,10 @@
+class GeometryError(ValueError):
+    def __init__(self, description):
+        self.description = description
+    def __str__(self):
+        return self.description
+
+class Point:
+    def __init__(self):
+
+
