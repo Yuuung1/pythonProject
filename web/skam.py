@@ -54,6 +54,13 @@ class Course(db.Model):
     is_new = db.Column(db.Boolean, default = False)
     date_start = db.Column(db.DateTime)
     date_end = db.Column(db.DateTime)
+    lessons = db.relationship('Lesson', backref='course')
+
+class Lesson(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(80), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    course_id = db.Column(db.Integer, db.ForeignKey('course.id'), nullable = False)
 
 @app.route('/')
 def homepage():  # put application's code here
@@ -104,4 +111,5 @@ def is_new(course):
 
 
 if __name__ == '__main__':
+    db.create_all()
     app.run()
